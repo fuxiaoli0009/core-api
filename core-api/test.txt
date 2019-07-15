@@ -1,0 +1,10 @@
+1、管理后台新建vhost:stats-service，并指定用户及权限；新建消息队列rabbit.test.queue；新建类型为Topic的交换机rabbit.test.exchange；
+2、配置文件spring-rabbitmq.xml中配置rabbit连接工厂connection-factory，配置模板template、队列queue、交换机topic-exchange、
+3、添加maven依赖
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+4、新建RabbitMqService.java类
+
+
