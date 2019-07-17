@@ -20,10 +20,9 @@ public class RabbitMqController {
 	private RabbitMqService rabbitMqService;
 	
 	@PostMapping(value="getAndSendMessage")
-	public void getAndSendMessage(String args) {
-		String commandName = "WACAI_OREDER_STATE_NOTIFY";
+	public void getAndSendMessage(String message) {
 		String applyId = "4617931";
 		//String args = {"applyId":4617931,"methodType":"STATE_14000","project":"xloan-app-api"}
-		rabbitMqService.sendMessage(commandName, applyId, args);
+		rabbitMqService.sendMessage(message);
 	}
 }

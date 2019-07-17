@@ -18,11 +18,16 @@
     <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="rabbit.test.exchange"/>
 
     <rabbit:queue name="rabbit.test.queue" durable="true" exclusive="false" auto-delete="false"/>
+	<rabbit:queue name="init.concerned.queue" durable="true" exclusive="false" auto-delete="false"></rabbit:queue>
     
     <rabbit:topic-exchange name="rabbit.test.exchange">
         <rabbit:bindings>
             <rabbit:binding queue="rabbit.test.queue" pattern="rabbit.test.key"/>
         </rabbit:bindings>
     </rabbit:topic-exchange>
-    
+    <rabbit:topic-exchange name="init.concerned.exchange">
+    	<rabbit:bindings>
+    		<rabbit:binding queue="init.concerned.queue" pattern="init.concerned.key"></rabbit:binding>
+    	</rabbit:bindings>
+    </rabbit:topic-exchange>
 </beans>
