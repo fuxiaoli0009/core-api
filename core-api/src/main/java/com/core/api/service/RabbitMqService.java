@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitMqService implements InitializingBean {
 	
-	private Logger logger = LoggerFactory.getLogger(RabbitMqService.class);
+	private static final Logger logger = LoggerFactory.getLogger(RabbitMqService.class);
 	
 	private ApplicationContext context;
 	
