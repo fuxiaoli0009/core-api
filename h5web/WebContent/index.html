@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no" />
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#49CEFF">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#49CEFF" />
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Home</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+  <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
+  <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" href="bower_components/Waves/dist/waves.min.css">
+  <link rel="stylesheet" href="bower_components/toastr/toastr.css">
+  <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- 加载中 -->
+<div id="preloader">
+    <div class="refresh-preloader"><div class="preloader"><i>.</i><i>.</i><i>.</i></div></div>
+</div>
+
+<div class="wrapper">
+	<!-- 顶部账号信息 -->
+	<nav class="navbar">
+	    <div class="navbar-container clearfix">
+	        <div class="pull-right">
+	      		<ul class="nav pull-right right-menu">
+	        		<li class="more-options dropdown">
+			            <a class="dropdown-toggle" data-toggle="dropdown">
+			                <i class="zmdi zmdi-account-circle"></i>
+			            </a>
+			            <div class="more-opt-container dropdown-menu">
+				            <a href="#"><i class="zmdi zmdi-account-o"></i>Account<span class="badge badge-warning">3</span></a>
+				            <a href="#"><i class="zmdi zmdi-storage"></i>Storage <span class="badge badge-danger">2</span></a>
+				            <a href="#"><i class="zmdi zmdi-run"></i>Exit</a>
+			            </div>
+			        </li>
+	        <li class="notification dropdown">
+	          <a class="dropdown-toggle">
+	            <i class="zmdi zmdi-notifications"></i>
+	            <span class="badge badge-primary">1</span>
+	          </a>
+	
+	          <div class="dropdown-menu">
+	            <h4 class="text-center info-color m-0">You have 19 new notifications</h4>
+	            <div class="notification-container">
+	              <a href="#"><i class="zmdi zmdi-email warning-color m-r-5"></i> You have 16 messages <span class="pull-right">4 minutes ago</span></a>
+	            </div>
+	            <a href="#" class="text-uppercase clear-all">Clear all notifications</a>
+	            <div class="check-ok">
+	              <i class="zmdi zmdi-check"></i>
+	            </div>
+	          </div>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<!-- 页面内容 -->
+    <div class="container-fluid">
+    
+        <div class="row">
+        	<div class="col-md-12">
+         		<div class="content-box">
+            		<div class="content">
+		                <button id="szRatePercent" type="button" class="btn btn-primary btn-lg"></button>
+		                <button id="hsAverageRatePercent" type="button" class="btn btn-success btn-lg"></button>
+		                <button id="starAverageRatePercent" type="button" class="btn btn-warning btn-lg"></button>
+		                <button id="starAverageRatePercent2" type="button" class="btn btn-danger btn-lg"></button>
+		            </div>
+		        </div>
+            </div>
+        </div>
+    
+    	<div class="row">
+        	<div class="col-lg-12 col-md-3">
+          		<div class="content-box success-bg white">
+	            	<div class="head clearfix">
+	              		<h5 class="content-title pull-left">Visitors</h5>
+	            	</div>
+	            	<div class="content">
+	              		<div id="line-chart-4" class="flot-chart"></div>
+	            	</div>
+	          	</div>
+	        </div>
+      	</div>
+    
+    	<!-- 第二个容器 -->
+        <div class="row">
+	        <div class="col-lg-12">
+	            <div class="content-box">
+	            	<div class="head head-with-btns clearfix">
+	              		<h5 class="content-title text-color pull-left">Total sales statistics</h5>
+		            </div>
+		            <div class="content">
+		                <div id="js-legend" class="chart-legend"></div>
+		                <div class="chartjs-container full-page-chart">
+		                	<canvas id="chart-line"></canvas>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    	
+    	<!-- 第一个容器 : hsStocks-->
+	    <div class="row">
+	        <div class="col-lg-12">
+	            <div class="content-box">
+	            	<div class="head head-with-btns clearfix">
+	              		<h5 class="content-title text-color pull-left">Exchange rates</h5>
+	              	</div>
+		            <div class="table-responsive">
+		                <table class="table table-striped">
+		                <thead>
+		                    <tr>
+		                      <th>名称</th>
+			                  <th>最新</th>
+			                  <th>期望</th>
+			                  <th>还差</th>
+			                  <th>跌幅</th>
+			                  <th>涨跌</th>
+			                  <th>PB/PE</th>
+			                  <th>操作</th>
+		                    </tr>
+		                  </thead>
+		                  <tbody id = "hsStocks">
+		                  </tbody>
+		                </table>
+		            </div>
+            	</div>
+            </div>
+	    </div>
+	    <!-- 第二个容器 : starStocks-->
+	    <div class="row">
+	        <div class="col-lg-12">
+	            <div class="content-box">
+	            	<div class="head head-with-btns clearfix">
+	              		<h5 class="content-title text-color pull-left">Exchange rates</h5>
+	              	</div>
+		            <div class="table-responsive">
+		                <table class="table table-striped">
+		                  <thead>
+		                    <tr>
+		                      <th>名称</th>
+			                  <th>最新</th>
+			                  <th>期望</th>
+			                  <th>还差</th>
+			                  <th>跌幅</th>
+			                  <th>涨跌</th>
+			                  <th>PB/PE</th>
+			                  <th>操作</th>
+		                    </tr>
+		                  </thead>
+		                  <tbody id = "starStocks">
+		                  </tbody>
+		                </table>
+		            </div>
+            	</div>
+            </div>
+	    </div>
+	    <!-- 第三个容器 : hkStocks-->
+	    <div class="row">
+	        <div class="col-lg-12">
+	            <div class="content-box">
+	            	<div class="head head-with-btns clearfix">
+	              		<h5 class="content-title text-color pull-left">Exchange rates</h5>
+	              	</div>
+		            <div class="table-responsive">
+		                <table class="table table-striped">
+		                  <thead>
+		                    <tr>
+		                      <th>名称</th>
+			                  <th>最新</th>
+			                  <th>期望</th>
+			                  <th>还差</th>
+			                  <th>跌幅</th>
+			                  <th>涨跌</th>
+			                  <th>PB/PE</th>
+			                  <th>操作</th>
+		                    </tr>
+		                  </thead>
+		                  <tbody id = "hkStocks">
+		                  </tbody>
+		                </table>
+		            </div>
+            	</div>
+            </div>
+	    </div>
+    </div>
+    <footer class="page-footer">dsfsd</footer>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+  <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+  <script src="bower_components/Waves/dist/waves.min.js"></script>
+  <script src="bower_components/toastr/toastr.js"></script>
+  <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="bower_components/datatables.net-responsive/js/dataTables.responsive.js"></script>
+  <script src="bower_components/moment/min/moment.min.js"></script>
+  <script src="bower_components/Chart.js/Chart.js"></script>
+  <script src="bower_components/flot/jquery.flot.js"></script>
+  <script src="bower_components/flot/jquery.flot.resize.js"></script>
+  <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
+  <script src="bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js"></script>
+  <script>
+  	//var homeUrl = "http://10.5.35.12:8081/api/";
+  	var homeUrl = "http://39.105.142.63:8081/api/";
+    var lineChartData = {
+    	labels : ["1","2","3","4","5","6"],
+        datasets : [
+            {
+                fillColor : "rgba(73, 206, 255, 0.5)",
+                strokeColor : "rgba(73, 206, 255, 0.7)",
+                pointColor : "rgba(73, 206, 255, 0.9)",
+                pointStrokeColor : "#fff",
+                pointHighlightFill : "rgba(255, 193, 7, 1)",
+                data : [1768,1650,1443,1410,1590,1790]
+            },
+            {
+                fillColor : "rgba(255, 187, 51, 0.5)",
+                strokeColor : "rgba(255, 187, 51, 0.7)",
+                pointColor : "rgba(255, 187, 51, 0.9)",
+                pointStrokeColor : "#fff",
+                pointHighlightFill : "rgba(244, 67, 54, 1)",
+                data : [1010,1050,1043,1010,990,1190]
+            },
+            {
+                fillColor : "rgba(153, 204, 0, 0.5)",
+                strokeColor : "rgba(153, 204, 0, 0.7)",
+                pointColor : "rgba(153, 204, 0, 0.9)",
+                pointStrokeColor : "#fff",
+                pointHighlightFill : "rgba(33, 150, 243, 1)",
+                data : [1210,1150,1143,1110,1090,1290]
+            }
+        ]
+
+    }
+
+    //判断是移动设备还是PC
+    function isPC() {
+    	var userAgentInfo = navigator.userAgent;
+    	var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+   	    var flag = true;
+   	    for (var v = 0; v < Agents.length; v++) {
+   	        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+   	            flag = false;
+   	        	break;
+   	      	}
+   	    }
+   	    return flag;
+   	}
+    
+    function updateColumn(tdObject, column){
+        var id = tdObject.attr("id");
+        var oldVal = tdObject.text();
+        var input = "<input type='text' class='form-control input-info' style='width:100%' id='tmpId' value='" + oldVal + "' >";
+        tdObject.text('');
+        tdObject.append(input);
+        $('#tmpId').focus();
+        $('#tmpId').blur(function(){
+            var newVal = $(this).val();
+            if(newVal != oldVal){
+                $.ajax({
+                    url: homeUrl + "update",
+                    type: 'get',
+                    async: true,
+                    data: {
+                        code:id,
+                        value:newVal,
+                        column:column
+                    },
+                    dataType:'json',
+                    success: function (data) {
+                        alert("更新成功");
+                    }
+                });
+            }
+            //closest：是从当前元素开始，沿Dom树向上遍历直到找到已应用选择器的一个匹配为止。
+            $(this).closest('td').text(newVal);
+        });
+    }
+    
+    function deleteStock(code){
+        var statu = confirm("确认删除【"+code+"】"+"?");
+        if(!statu){
+            return false;
+        }
+        $.ajax({
+            url: homeUrl + "delete",
+            type: 'get',
+            async: true,
+            data: {
+                code:code
+            },
+            dataType:'json',
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+    
+    //列表数据
+    function getHtml(datas){
+    	var isPc = isPC();
+    	var html = "";
+    	$.each(datas, function(i, obj) {
+        	if((!isPc&&i<15)||isPc){
+        		html += '<tr>';
+            	html += '<td>' + obj.name +'<i class="zmdi zmdi-favorite danger-color"></i></td>';
+            	html += '<td>' + obj.realTimePrice +'</td>';
+            	html += '<td id=' + obj.code +' ondblclick="updateColumn($(this), \'buyprice\')">' + obj.buyPrice + '</td>';
+            	html += '<td><span class="zmdi zmdi-long-arrow-down danger-color f-s-18"></span>' + obj.buyRate +'</td>';
+            	html += '<td>' + obj.maxRate +'</td>';
+            	html += '<td>' + obj.ratePercent +'</td>';
+            	html += '<td><small><a href="'+obj.PBPEUrl+'" target="_blank">PE/PB</a></small></td>';
+            	html += '<td><small><button type="button" class="btn btn-primary btn-xs" onclick="deleteStock('+obj.code+')">删除</button></small></td>';
+            	html += '</tr>';
+        	}
+        	if(isPc){
+        		html += '<td id="' + obj.code +'" colspan="8" ondblclick="updateColumn($(this), \'description\')">&nbsp;&nbsp;' + obj.description +'</td>';
+        	}
+        });
+    	return html;
+    }
+    
+    window.onload = function(){
+    	$.ajax({
+            type: "post",
+            url: homeUrl + "indexNew",
+            data: {
+            	source:'0'
+            },
+            success: function (data) {
+            	var json = eval("("+data+")");
+            	var hsAverageRatePercent = json.hsAverageRatePercent;
+            	var starAverageRatePercent = json.starAverageRatePercent;
+            	var szRatePercent = json.szRatePercent;
+            	var hsStocks = json.hsStocks;
+            	var hkStocks = json.hkStocks;
+            	var starStocks = json.starStocks;
+            	$("#szRatePercent").text(szRatePercent);
+            	$("#hsAverageRatePercent").text(hsAverageRatePercent);
+            	$("#starAverageRatePercent").text(starAverageRatePercent);
+            	$("#starAverageRatePercent2").text(starAverageRatePercent);
+            	var html = getHtml(hsStocks);
+                $("#hsStocks").html(html);
+                html = getHtml(hkStocks);
+                $("#hkStocks").html(html);
+                html = getHtml(starStocks);
+                $("#starStocks").html(html);
+            }
+        });
+      var ctx = document.getElementById("chart-line").getContext("2d");
+      var myLine = new Chart(ctx).Line(lineChartData, {
+        scaleShowVerticalLines: false,
+//        scaleShowLabels: false,
+//        maintainAspectRatio: true,
+        datasetStrokeWidth : 6,
+        pointDotRadius : 6,
+        responsive: true,
+        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].pointColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+      });
+
+      document.getElementById('js-legend').innerHTML = myLine.generateLegend();
+  }
+
+  </script>
+  <script>
+  $(function () {
+      var d4 = [];
+      for (var i = 0; i <= 50; i += 1) {
+          d4.push([i, parseInt(Math.random() * 100)]);
+      }
+      var d3 = [];
+      for (var i = 0; i <= 50; i += 1) {
+          d3.push([i, parseInt(Math.random() * 100)]);
+      }
+
+      var options2 = {
+          series: {
+            shadowSize: 5,
+            label: "Qty",
+            lines: {
+                show: true,
+                lineWidth: 2
+            }
+          },
+          grid: {
+            margin: 10,
+            show: false,
+            hoverable: true,
+            clickable: false
+          },
+          legend: {
+            show: false
+          },
+          tooltip: {
+            show: true,
+            cssClass: "flot-tooltip",
+            defaultTheme: false,
+            content: '%y.2',
+            shifts: {
+                x: 1,
+                y: -45
+            }
+          }
+      };
+
+      if ($("#line-chart-4")[0]) {
+          $.plot($("#line-chart-4"), [
+              {data: d4, color: '#fff' },
+              {data: d3, color: '#eee' }
+          ], options2);
+      }
+
+  });
+  </script>
+    <script src="js/common.js"></script>
+ 
+
+</body>
+</html>
