@@ -49,8 +49,8 @@ public class ExcelController {
 			for(List<Object> row : rowList) {
 				if(row.get(0)!=null && row.get(1)!=null) {
 					map.put("type", row.get(0)!=null?row.get(0).toString():"");
-					map.put("code", row.get(1)!=null?row.get(1).toString():"");
-					map.put("name", row.get(2)!=null?row.get(2).toString():"");
+					map.put("code", row.get(1)!=null?row.get(1).toString().replace("\"", ""):"");
+					map.put("name", row.get(2)!=null?row.get(2).toString().replace(" ", ""):"");
 					map.put("maxValue", row.get(3)!=null?row.get(3).toString():"");
 					map.put("flag", FlagTypeEnum.INIT_CONCERNED.getCode());
 					rabbitMqService.sendMessage(JSON.toJSONString(map));
