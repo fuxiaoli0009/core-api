@@ -51,7 +51,8 @@ public class ExcelController {
 					map.put("type", row.get(0)!=null?row.get(0).toString():"");
 					map.put("code", row.get(1)!=null?row.get(1).toString().replace("\"", ""):"");
 					map.put("name", row.get(2)!=null?row.get(2).toString().replace(" ", ""):"");
-					map.put("maxValue", row.get(3)!=null?row.get(3).toString():"");
+					map.put("buyPrice", row.get(3)!=null?row.get(3).toString():"");
+					map.put("maxValue", row.get(4)!=null?row.get(4).toString():"");
 					map.put("flag", FlagTypeEnum.INIT_CONCERNED.getCode());
 					rabbitMqService.sendMessage(JSON.toJSONString(map));
 					logger.info("code:{}成功发送mq", row.get(1).toString());
